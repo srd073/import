@@ -1,15 +1,17 @@
 import time
-import random
+import progressbar
 
 #讀取大檔案,計算共有幾筆留言
 data = []
 count = 0
+bar=progressbar.ProgressBar(max_value=1000000)
 with open('reviews.txt','r') as f:
 	for line in f:
 		data.append(line)
 		count += 1
-		if (count % 400000) == 0:
-			print(count)
+		#if (count % 400000) == 0:
+		#	print(count)
+		bar.update(count)
 print('檔案讀取完成,總共有',count,'筆資料！')	
 #print(data[0])
 print('=====================')
@@ -60,6 +62,8 @@ print('一共有',len(bad),'筆留言提到bad')
 
 # 統計所有的字分別放入dict------------------
 start_time=time.time()
+#for i in progressbar.progressbar(range(100)):
+#    time.sleep(0.02)
 wc= {}
 for d in data:
 	words=d.split()
